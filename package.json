@@ -1,0 +1,19 @@
+{
+  "name": "rido",
+  "private": true,
+  "scripts": {
+    "deploy": "firebase deploy",
+    "app:setup": "npx cap add ios && npx cap add android",
+    "app:sync": "npx cap sync",
+    "app:ios": "npx cap open ios",
+    "app:android": "npx cap open android"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.1.0"
+  },
+  "dependencies": {
+    "@capacitor/core": "^6.1.0",
+    "@capacitor/ios": "^6.1.0",
+    "@capacitor/android": "^6.1.0"
+  }
+}
