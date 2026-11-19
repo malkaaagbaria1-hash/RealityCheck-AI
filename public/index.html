@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Rido – صاحب الطلب والمرسل</title>
+<meta name="theme-color" content="#4b2ee0">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800;900&family=Rubik:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--brand:#6d4aff;--brand2:#9b6bff;--mint:#12c79a;--ink:#17122e;--muted:#6f6a85;--line:#e9e5f5;--soft:#f5f3fb;--warn:#e5484d}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-font-smoothing:antialiased}
+body{margin:0;font-family:Alexandria,Rubik,system-ui,sans-serif;color:var(--ink);background:#f7f5fd;min-height:100vh}
+html:lang(en) body{font-family:Rubik,system-ui,sans-serif}
+html:lang(he) body{font-family:Rubik,system-ui,sans-serif}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+.top{background:linear-gradient(135deg,#2a1a6b,#4b2ee0 60%,#7b55ff);color:#fff;padding:18px 18px 64px;position:relative}
+.bar{display:flex;align-items:center;gap:10px;max-width:640px;margin:auto}
+.logo{width:40px;height:40px;border-radius:12px;background:#fff;display:grid;place-items:center;font-weight:900;color:var(--brand);font-size:22px;font-family:Rubik}
+.bar h1{font-size:20px;margin:0;font-weight:900;font-family:Rubik;letter-spacing:-.3px}
+.bar p{margin:0;font-size:12.5px;opacity:.8}
+.lng{margin-inline-start:auto;display:flex;background:rgba(255,255,255,.15);border-radius:12px;padding:3px}
+.lng button{color:#fff;padding:6px 10px;border-radius:9px;font-size:13px;font-weight:700}
+.lng button.on{background:#fff;color:var(--brand)}
+.roles{max-width:640px;margin:16px auto 0;display:flex;background:rgba(255,255,255,.14);border-radius:16px;padding:5px}
+.roles button{flex:1;color:#fff;padding:12px 6px;border-radius:12px;font-weight:800;font-size:15px}
+.roles button.on{background:#fff;color:var(--ink);box-shadow:0 4px 14px rgba(0,0,0,.15)}
+main{max-width:640px;margin:-46px auto 0;padding:0 14px 60px;position:relative}
+.card{background:#fff;border-radius:22px;padding:18px;box-shadow:0 6px 24px rgba(40,20,120,.08);margin-bottom:14px}
+.card h2{font-size:18px;margin:0 0 12px;font-weight:800}
+.fl{display:block;font-size:13px;color:var(--muted);font-weight:600;margin:12px 2px 6px}
+.in{width:100%;border:1.5px solid var(--line);background:var(--soft);border-radius:14px;padding:12px 13px;font-size:16px;outline:none}
+.in:focus{border-color:var(--brand);background:#fff}
+textarea.in{resize:vertical;min-height:70px}
+.two{display:flex;gap:10px}.two>*{flex:1;min-width:0}
+.cta{width:100%;margin-top:16px;background:linear-gradient(120deg,var(--brand),var(--brand2));color:#fff;border-radius:18px;padding:16px;font-weight:800;font-size:17px;box-shadow:0 10px 24px rgba(109,74,255,.35)}
+.cta:disabled{opacity:.5;box-shadow:none;cursor:not-allowed}
+.sec{font-size:16px;font-weight:800;margin:20px 4px 10px;display:flex;justify-content:space-between;align-items:center}
+.sec span{font-size:12.5px;color:var(--muted);font-weight:500}
+.order{background:#fff;border-radius:20px;padding:16px;margin-bottom:12px;box-shadow:0 4px 18px rgba(40,20,120,.07);border:2px solid transparent;transition:.3s}
+.order.new{border-color:var(--mint);animation:pulse 1.2s 3}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(18,199,154,.18)}}
+.orow{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.rname{font-size:18px;font-weight:900;color:var(--brand)}
+.price{font-size:26px;font-weight:900;white-space:nowrap;letter-spacing:-.5px}
+.price small{display:block;font-size:11.5px;color:var(--muted);font-weight:600;text-align:end;letter-spacing:0}
+.route{margin:12px 0 4px;padding:0;list-style:none}
+.route li{display:flex;gap:10px;align-items:flex-start;padding:5px 0;position:relative;font-size:15px}
+.route li i{width:14px;height:14px;border-radius:50%;border:3px solid var(--brand);flex:none;margin-top:4px}
+.route li:last-child i{border-color:var(--mint);background:var(--mint)}
+.route li:first-child:after{content:"";position:absolute;inset-inline-start:6px;top:22px;bottom:-8px;width:2px;background:var(--line)}
+.route small{display:block;color:var(--muted);font-size:12.5px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{background:var(--soft);border-radius:10px;padding:5px 10px;font-size:13px;font-weight:600}
+.tag.time{background:#efeaff;color:#4b2ee0}
+.tag.cash{background:#fff6dd;color:#8a6200}
+.notes{margin-top:10px;background:var(--soft);border-radius:12px;padding:10px 12px;font-size:14px;color:#4a4560}
+.acts{display:flex;gap:8px;margin-top:14px}
+.btn{flex:1;border-radius:14px;padding:13px 8px;font-weight:800;font-size:15px;text-align:center;text-decoration:none;display:block}
+.btn.ok{background:var(--mint);color:#fff;box-shadow:0 8px 18px rgba(18,199,154,.3)}
+.btn.main{background:linear-gradient(120deg,var(--brand),var(--brand2));color:#fff}
+.btn.ghost{background:var(--soft);color:var(--ink)}
+.btn.red{background:#fdeced;color:var(--warn)}
+.st{font-size:12px;font-weight:800;padding:4px 10px;border-radius:20px;white-space:nowrap}
+.st.open{background:#fff2e0;color:#b45d00}.st.taken{background:#efeaff;color:#4b2ee0}.st.picked{background:#e4f0ff;color:#1f5fd1}.st.delivered{background:#e3f8f1;color:#0c9d79}
+.who{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:14px}
+.av{width:30px;height:30px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;font-size:13px}
+.empty{text-align:center;color:var(--muted);padding:30px 10px;font-size:14.5px;line-height:1.7}
+.empty b{display:block;font-size:40px;margin-bottom:6px}
+.banner{background:#fff;border-radius:18px;padding:14px 16px;margin-bottom:14px;font-size:14px;line-height:1.6;box-shadow:0 4px 18px rgba(40,20,120,.06)}
+.banner.warn{background:#fff4f4;color:#9b1c22}
+.live{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--mint)}
+.live:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--mint);animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.3}}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:14px;font-size:14px;z-index:9;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:90%;text-align:center}
+.soundbtn{width:100%;background:#efeaff;color:#4b2ee0;border-radius:14px;padding:12px;font-weight:700;font-size:14px;margin-bottom:14px}
+.hide{display:none!important}
+.modal{position:fixed;inset:0;background:rgba(15,10,40,.55);display:flex;align-items:center;justify-content:center;padding:18px;z-index:20}
+.modal .card{width:100%;max-width:420px;margin:0}
+.me{display:flex;align-items:center;gap:8px;max-width:640px;margin:10px auto 0;color:#fff;font-size:13px;opacity:.9}
+.me button{color:#fff;text-decoration:underline;font-size:13px}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="bar">
+    <div class="logo">R</div>
+    <div><h1>Rido</h1><p data-t="tag"></p></div>
+    <div class="lng"><button data-lang="ar">ع</button><button data-lang="he">עב</button><button data-lang="en">EN</button></div>
+  </div>
+  <div class="me"><span id="meTxt"></span><button id="editMe" data-t="edit"></button></div>
+  <div class="roles"><button data-role="rest" data-t="roleRest"></button><button data-role="drv" data-t="roleDrv"></button></div>
+</div>
+<main>
+  <div id="status" class="banner"><span data-t="loading"></span></div>
+
+  <section id="restView" class="hide">
+    <form class="card" id="form" autocomplete="off">
+      <h2 data-t="newOrder"></h2>
+      <label class="fl" data-t="fRest"></label><input class="in" id="fRest" required maxlength="60">
+      <div class="two">
+        <div><label class="fl" data-t="fFrom"></label><input class="in" id="fFrom" required maxlength="80"></div>
+        <div><label class="fl" data-t="fTo"></label><input class="in" id="fTo" required maxlength="80"></div>
+      </div>
+      <div class="two">
+        <div><label class="fl" data-t="fTime"></label><input class="in" id="fTime" type="time" required></div>
+        <div><label class="fl" data-t="fPrice"></label><input class="in" id="fPrice" type="number" min="1" max="2000" inputmode="numeric" required></div>
+      </div>
+      <div class="two">
+        <div><label class="fl" data-t="fPhone"></label><input class="in" id="fPhone" inputmode="tel" dir="ltr" maxlength="20"></div>
+        <div><label class="fl" data-t="fCash"></label><input class="in" id="fCash" type="number" min="0" max="5000" inputmode="numeric"></div>
+      </div>
+      <label class="fl" data-t="fNotes"></label><textarea class="in" id="fNotes" maxlength="300"></textarea>
+      <button class="cta" id="send" type="submit" data-t="send"></button>
+    </form>
+    <div class="sec"><span data-t="myOrders" style="font-size:16px;font-weight:800;color:var(--ink)"></span><span class="live" data-t="liveTxt"></span></div>
+    <div id="myList"></div>
+  </section>
+
+  <section id="drvView" class="hide">
+    <button class="soundbtn" id="pushBtn" data-t="pushBtn"></button>
+    <button class="soundbtn" id="soundBtn" data-t="soundOn"></button>
+    <div class="sec"><span data-t="openOrders" style="font-size:16px;font-weight:800;color:var(--ink)"></span><span class="live" data-t="liveTxt"></span></div>
+    <div id="openList"></div>
+    <div class="sec"><span data-t="myJobs" style="font-size:16px;font-weight:800;color:var(--ink)"></span></div>
+    <div id="jobList"></div>
+  </section>
+</main>
+<div id="toast" class="toast hide"></div>
+<div id="profile" class="modal hide"><form class="card" id="pform" autocomplete="on">
+  <h2 data-t="pTitle"></h2>
+  <label class="fl" data-t="pName"></label><input class="in" id="pName" required maxlength="40" autocomplete="name">
+  <label class="fl" data-t="pPhone"></label><input class="in" id="pPhone" required maxlength="20" inputmode="tel" dir="ltr" autocomplete="tel">
+  <button class="cta" type="submit" data-t="pSave"></button>
+</form></div>
+
+<script type="module">
+(function(){
+"use strict";
+const L={
+ en:{pushBtn:"🔔 Get notifications even when the app is closed",pushOk:"✅ Notifications are on",pushDenied:"Notifications were blocked. Allow them in your phone settings.",pushNo:"This phone/browser doesn't support notifications. On iPhone: add the app to the home screen first.",pushKey:"Notifications aren't set up yet (vapidKey in firebase-config.js).",noConfig:"Firebase isn't set up yet. Open firebase-config.js and paste your project's settings (see README).",pTitle:"Welcome! Tell us who you are",pName:"Your name",pPhone:"Your phone number",pSave:"Let's go",edit:"Edit",hello:"Hi",
+  tag:"Anyone who needs to send something posts it, and couriers get it instantly",roleRest:"📦 I'm a sender",roleDrv:"🛵 I'm a courier",loading:"Connecting…",
+  noDb:"Can't reach the server. Check your internet and try again.",slow:"The connection is slow… info may not be up to date.",
+  noWrite:"You can only view. Ask the owner for edit access to post or accept orders.",
+  newOrder:"📢 New delivery",fRest:"Sender name (restaurant, shop or person)",fFrom:"From (pickup address)",fTo:"To (drop-off address)",fTime:"Ready for pickup at",fPrice:"Pay to courier (₪)",
+  fPhone:"Contact phone",fCash:"Cash to collect on delivery (₪)",fNotes:"Notes",send:"📢 Send to all couriers",sending:"Sending…",
+  myOrders:"My deliveries",liveTxt:"Live",openOrders:"Deliveries waiting for a courier",myJobs:"Deliveries I accepted",
+  soundOn:"🔔 Tap here to turn on sound for new deliveries",soundIsOn:"🔔 Sound is on – it rings for every new delivery",
+  emptyRest:"<b>📭</b>You haven't sent anything yet.<br>Fill in the form above and every courier will see it instantly.",
+  emptyOpen:"<b>🛵</b>No deliveries right now.<br>Keep this page open – it rings as soon as someone posts.",emptyJobs:"<b>✨</b>You haven't accepted any deliveries yet.",
+  ready:"Ready at",forDrv:"for courier",collect:"Collect cash",accept:"✅ I'll take it",taken:"Sorry, another courier took it 😅",gotIt:"🎉 It's yours! Head to the pickup address",
+  map:"🗺️ Map",waze:"Waze",picked:"📦 Picked up",delivered:"✅ Delivered",del:"Delete",call:"📞 Call",
+  stOpen:"Waiting for a courier",stTaken:"Courier on the way to pickup",stPicked:"On the way to drop-off",stDelivered:"Delivered",
+  by:"Courier:",posted:"Posted",min:"min ago",now:"just now",sent:"📢 Sent to all couriers",newOne:"🔔 New delivery!",someone:"Courier",
+  delOk:"Deleted",errSend:"Something went wrong, try again",quota:"Limit reached, delete old deliveries"},
+ ar:{pushBtn:"🔔 فعّل الإشعارات حتى لو التطبيق مسكّر",pushOk:"✅ الإشعارات شغّالة",pushDenied:"الإشعارات مسكّرة. اسمح فيها من إعدادات التلفون.",pushNo:"هاد التلفون أو المتصفح ما بيدعم إشعارات. بالآيفون: ضيف التطبيق للشاشة الرئيسية أول.",pushKey:"الإشعارات لسا مش مجهّزة (vapidKey بملف firebase-config.js).",noConfig:"لسا ما انحطت إعدادات Firebase. افتح ملف firebase-config.js وحط إعدادات مشروعك (شوف README).",pTitle:"أهلاً! عرّفنا عليك",pName:"اسمك",pPhone:"رقم تلفونك",pSave:"يلا نبلّش",edit:"تعديل",hello:"أهلاً",tag:"أي حدا بدو يبعت إشي بيكتب، والمرسلين بيوصلهم فوراً",roleRest:"📦 أنا صاحب الطلب",roleDrv:"🛵 أنا مرسل",loading:"جاري الاتصال…",
+  noDb:"ما في اتصال بالسيرفر. تأكد من الإنترنت وجرّب كمان مرة.",slow:"الاتصال بطيء… المعلومات ممكن ما تكون محدّثة.",
+  noWrite:"عندك صلاحية مشاهدة بس. اطلب من صاحب الصفحة يعطيك صلاحية Editor عشان تقدر تنشر أو تقبل طلبات.",
+  newOrder:"📢 طلب توصيل جديد",fRest:"اسم صاحب الطلب (مطعم، محل أو شخص)",fFrom:"من وين (عنوان الاستلام)",fTo:"لوين (عنوان التسليم)",fTime:"الساعة كم جاهز للاستلام",fPrice:"قديش بتدفع للمرسل (₪)",
+  fPhone:"تلفون للتواصل",fCash:"كاش يجمعه عند التسليم (₪)",fNotes:"ملاحظات",send:"📢 ابعت لكل المرسلين",sending:"بنبعت…",
+  myOrders:"طلباتي",liveTxt:"مباشر",openOrders:"طلبات بتستنى مرسل",myJobs:"طلباتي اللي قبلتها",
+  soundOn:"🔔 اكبس هون لتشغيل صوت الطلبات الجديدة",soundIsOn:"🔔 الصوت شغّال، رح يرن مع كل طلب جديد",
+  emptyRest:"<b>📭</b>لسا ما بعتت طلبات.<br>عبّي الفورما فوق وكل المرسلين رح يشوفوا الطلب فوراً.",
+  emptyOpen:"<b>🛵</b>ما في طلبات هلأ.<br>خلّي الصفحة مفتوحة، أول ما مطعم يبعت طلب رح يرن.",emptyJobs:"<b>✨</b>لسا ما قبلت طلبات.",
+  ready:"جاهز الساعة",forDrv:"للمرسل",collect:"اجمع كاش",accept:"✅ أنا آخذه",taken:"للأسف مرسل ثاني أخذه 😅",gotIt:"🎉 الطلب إلك! روح على عنوان الاستلام",
+  map:"🗺️ الخريطة",waze:"Waze",picked:"📦 استلمت",delivered:"✅ وصّلت",del:"حذف",call:"📞 اتصال",
+  stOpen:"بيستنى مرسل",stTaken:"المرسل بالطريق للاستلام",stPicked:"بالطريق للزبون",stDelivered:"انوصل",
+  by:"المرسل:",posted:"انبعث قبل",min:"د",now:"هلأ",sent:"📢 الطلب انبعث لكل المرسلين",newOne:"🔔 طلب جديد!",someone:"مرسل",
+  delOk:"انحذف الطلب",errSend:"صار خطأ، جرّب كمان مرة",quota:"وصلنا للحد الأقصى من الطلبات، احذف طلبات قديمة"},
+ he:{pushBtn:"🔔 הפעל התראות גם כשהאפליקציה סגורה",pushOk:"✅ ההתראות פועלות",pushDenied:"ההתראות חסומות. אפשר אותן בהגדרות הטלפון.",pushNo:"הטלפון או הדפדפן לא תומכים בהתראות. באייפון: הוסף קודם את האפליקציה למסך הבית.",pushKey:"ההתראות עדיין לא הוגדרו (vapidKey בקובץ firebase-config.js).",noConfig:"עדיין לא הוגדרו פרטי Firebase. פתח את firebase-config.js והדבק את הגדרות הפרויקט שלך (ראה README).",pTitle:"שלום! ספר לנו מי אתה",pName:"השם שלך",pPhone:"מספר הטלפון שלך",pSave:"יאללה מתחילים",edit:"עריכה",hello:"שלום",tag:"כל מי שרוצה לשלוח משהו כותב, והשליחים מקבלים מיד",roleRest:"📦 אני שולח",roleDrv:"🛵 אני שליח",loading:"מתחבר…",
+  noDb:"אין חיבור לשרת. בדוק את האינטרנט ונסה שוב.",slow:"החיבור איטי… ייתכן שהמידע לא מעודכן.",
+  noWrite:"יש לך הרשאת צפייה בלבד. בקש מבעל הדף הרשאת Editor כדי לפרסם או לקבל הזמנות.",
+  newOrder:"📢 הזמנת משלוח חדשה",fRest:"שם השולח (מסעדה, חנות או אדם פרטי)",fFrom:"מאיפה (כתובת איסוף)",fTo:"לאן (כתובת מסירה)",fTime:"באיזו שעה מוכן לאיסוף",fPrice:"כמה משלמים לשליח (₪)",
+  fPhone:"טלפון ליצירת קשר",fCash:"מזומן לגבות במסירה (₪)",fNotes:"הערות",send:"📢 שלח לכל השליחים",sending:"שולח…",
+  myOrders:"ההזמנות שלי",liveTxt:"בשידור חי",openOrders:"הזמנות שמחכות לשליח",myJobs:"הזמנות שקיבלתי",
+  soundOn:"🔔 לחץ כאן כדי להפעיל צליל להזמנות חדשות",soundIsOn:"🔔 הצליל פועל, יצלצל עם כל הזמנה חדשה",
+  emptyRest:"<b>📭</b>עוד לא שלחת הזמנות.<br>מלא את הטופס וכל השליחים יראו את ההזמנה מיד.",
+  emptyOpen:"<b>🛵</b>אין הזמנות כרגע.<br>השאר את הדף פתוח, כשמסעדה תשלח הזמנה זה יצלצל.",emptyJobs:"<b>✨</b>עוד לא קיבלת הזמנות.",
+  ready:"מוכן בשעה",forDrv:"לשליח",collect:"לגבות מזומן",accept:"✅ אני לוקח",taken:"שליח אחר כבר לקח 😅",gotIt:"🎉 המשלוח שלך! סע לכתובת האיסוף",
+  map:"🗺️ מפה",waze:"Waze",picked:"📦 אספתי",delivered:"✅ מסרתי",del:"מחק",call:"📞 התקשר",
+  stOpen:"מחכה לשליח",stTaken:"השליח בדרך לאיסוף",stPicked:"בדרך ללקוח",stDelivered:"נמסר",
+  by:"השליח:",posted:"נשלח לפני",min:"דק׳",now:"עכשיו",sent:"📢 ההזמנה נשלחה לכל השליחים",newOne:"🔔 הזמנה חדשה!",someone:"שליח",
+  delOk:"ההזמנה נמחקה",errSend:"הייתה שגיאה, נסה שוב",quota:"הגענו למקסימום הזמנות, מחק הזמנות ישנות"}
+};
+let LANG='ar';try{const s=localStorage.getItem('shlihli-lang');if(L[s])LANG=s;}catch(e){}
+let ROLE='rest';try{const s=localStorage.getItem('shlihli-role');if(s==='drv')ROLE='drv';}catch(e){}
+if(new URLSearchParams(location.search).get('role')==='drv')ROLE='drv';
+const T=k=>L[LANG][k]||k;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let api=null,me=null,canWrite=true,orders=[],first=true,sound=false,actx=null,seen=new Set();
+
+function applyLang(){document.documentElement.lang=LANG;document.documentElement.dir=LANG==='en'?'ltr':'rtl';
+  document.querySelectorAll('[data-t]').forEach(e=>{e.innerHTML=T(e.dataset.t);});
+  document.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('on',b.dataset.lang===LANG));
+  if(sound)$('soundBtn').textContent=T('soundIsOn');render();}
+function applyRole(){document.querySelectorAll('[data-role]').forEach(b=>b.classList.toggle('on',b.dataset.role===ROLE));
+  $('restView').classList.toggle('hide',ROLE!=='rest');$('drvView').classList.toggle('hide',ROLE!=='drv');render();}
+document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{LANG=b.dataset.lang;try{localStorage.setItem('shlihli-lang',LANG);}catch(e){}applyLang();});
+document.querySelectorAll('[data-role]').forEach(b=>b.onclick=()=>{ROLE=b.dataset.role;try{localStorage.setItem('shlihli-role',ROLE);}catch(e){}applyRole();});
+function toast(m){const t=$('toast');t.textContent=m;t.classList.remove('hide');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.add('hide'),3200);}
+function ring(){if(!sound)return;try{actx=actx||new(window.AudioContext||window.webkitAudioContext)();
+  [[880,0],[1175,.18],[880,.36],[1175,.54]].forEach(([f,t])=>{const o=actx.createOscillator(),g=actx.createGain(),T0=actx.currentTime+t;o.frequency.value=f;g.gain.setValueAtTime(.0001,T0);g.gain.exponentialRampToValueAtTime(.25,T0+.02);g.gain.exponentialRampToValueAtTime(.0001,T0+.16);o.connect(g).connect(actx.destination);o.start(T0);o.stop(T0+.18);});}catch(e){}
+  try{navigator.vibrate&&navigator.vibrate([200,100,200]);}catch(e){}}
+$('soundBtn').onclick=()=>{sound=true;try{actx=actx||new(window.AudioContext||window.webkitAudioContext)();actx.resume();}catch(e){}$('soundBtn').textContent=T('soundIsOn');ring();};
+function ago(ts){const m=Math.floor((Date.now()-ts)/60000);return m<1?T('now'):T('posted')+' '+m+' '+T('min');}
+const gmaps=o=>'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(o.from)+'&destination='+encodeURIComponent(o.to)+'&travelmode=driving';
+const waze=o=>'https://waze.com/ul?q='+encodeURIComponent(o.from)+'&navigate=yes';
+const stTxt={open:'stOpen',taken:'stTaken',picked:'stPicked',delivered:'stDelivered'};
+
+function card(o,mode){
+  const st=`<span class="st ${o.status}">${T(stTxt[o.status]||'stOpen')}</span>`;
+  let acts='';
+  if(mode==='open')acts=`<div class="acts"><button class="btn ok" data-take="${o.id}" ${canWrite&&me?'':'disabled'}>${T('accept')}</button><a class="btn ghost" href="${gmaps(o)}" target="_blank" rel="noopener">${T('map')}</a></div>`;
+  else if(mode==='job'){
+    acts=`<div class="acts"><a class="btn ghost" href="${o.status==='taken'?waze(o):'https://waze.com/ul?q='+encodeURIComponent(o.to)+'&navigate=yes'}" target="_blank" rel="noopener">🧭 ${T('waze')}</a><a class="btn ghost" href="${gmaps(o)}" target="_blank" rel="noopener">${T('map')}</a></div>`;
+    if(o.status==='taken')acts+=`<div class="acts"><button class="btn main" data-step="picked" data-id="${o.id}">${T('picked')}</button></div>`;
+    else if(o.status==='picked')acts+=`<div class="acts"><button class="btn ok" data-step="delivered" data-id="${o.id}">${T('delivered')}</button></div>`;
+  } else if(mode==='mine'){
+    if(o.courier)acts+=`<div class="who"><div class="av">${esc(nameOf(o.courier)[0])}</div><span>${T('by')} <b>${esc(nameOf(o.courier))}</b></span>${C(o).courierPhone?`<a class="tag" href="tel:${esc(C(o).courierPhone)}" dir="ltr" style="margin-inline-start:auto">📞 ${esc(C(o).courierPhone)}</a>`:''}</div>`;
+    if(o.status==='open'||o.status==='delivered')acts+=`<div class="acts"><button class="btn red" data-del="${o.id}">${T('del')}</button></div>`;
+  }
+  return `<div class="order ${mode==='open'&&!seen.has(o.id)&&!first?'new':''}">
+    <div class="orow"><div><div class="rname">${esc(o.rest)}</div><div style="margin-top:4px">${st}</div></div><div class="price">₪${esc(o.price)}<small>${T('forDrv')}</small></div></div>
+    <ul class="route"><li><i></i><div>${esc(o.from)}</div></li><li><i></i><div>${esc(o.to)}</div></li></ul>
+    <div class="meta"><span class="tag time">⏰ ${T('ready')} ${esc(o.time)}</span>${+o.cash?`<span class="tag cash">💵 ${T('collect')} ₪${esc(o.cash)}</span>`:''}${C(o).phone&&mode!=='open'?`<a class="tag" href="tel:${esc(C(o).phone)}" dir="ltr">📞 ${esc(C(o).phone)}</a>`:''}<span class="tag">🕒 ${ago(o.createdAt)}</span></div>
+    ${o.notes?`<div class="notes">📝 ${esc(o.notes)}</div>`:''}${acts}</div>`;
+}
+function render(){
+  if(!$('myList'))return;
+  const mine=orders.filter(o=>o.by===me),open=orders.filter(o=>o.status==='open'),jobs=orders.filter(o=>o.courier===me&&o.status!=='delivered');
+  $('myList').innerHTML=mine.length?mine.map(o=>card(o,'mine')).join(''):`<div class="empty">${T('emptyRest')}</div>`;
+  $('openList').innerHTML=open.length?open.map(o=>card(o,'open')).join(''):`<div class="empty">${T('emptyOpen')}</div>`;
+  $('jobList').innerHTML=jobs.length?jobs.map(o=>card(o,'job')).join(''):`<div class="empty">${T('emptyJobs')}</div>`;
+  open.forEach(o=>seen.add(o.id));
+}
+setInterval(render,30000);
+
+document.addEventListener('click',async e=>{
+  const tk=e.target.closest('[data-take]');
+  if(tk){tk.disabled=true;try{const r=await api.take(tk.dataset.take,profile);toast(r?T('gotIt'):T('taken'));if(!r)tk.disabled=false;}catch(err){console.error(err);toast(T('taken'));tk.disabled=false;}return;}
+  const sp=e.target.closest('[data-step]');
+  if(sp){sp.disabled=true;try{await api.step(sp.dataset.id,sp.dataset.step);}catch(err){console.error(err);toast(T('errSend'));sp.disabled=false;}return;}
+  const dl=e.target.closest('[data-del]');
+  if(dl){dl.disabled=true;try{await api.del(dl.dataset.del);toast(T('delOk'));}catch(err){console.error(err);toast(T('errSend'));dl.disabled=false;}}
+});
+$('form').addEventListener('submit',async e=>{e.preventDefault();if(!api||!me)return;
+  const v=id=>$(id).value.trim();const b=$('send');b.disabled=true;b.textContent=T('sending');
+  try{try{localStorage.setItem('shlihli-rest',v('fRest'));localStorage.setItem('shlihli-from',v('fFrom'));}catch(_){}
+    await api.add({rest:v('fRest'),from:v('fFrom'),to:v('fTo'),time:v('fTime'),price:Math.round(+v('fPrice')),cash:Math.round(+v('fCash')||0),
+      notes:v('fNotes'),status:'open',by:me,byName:profile.name,courier:null,createdAt:Date.now()},{phone:v('fPhone')||profile.phone});
+    ['fTo','fPrice','fCash','fNotes','fPhone'].forEach(id=>$(id).value='');toast(T('sent'));}
+  catch(err){console.error(err);toast(T('errSend'));}
+  b.disabled=false;b.textContent=T('send');});
+try{$('fRest').value=localStorage.getItem('shlihli-rest')||'';$('fFrom').value=localStorage.getItem('shlihli-from')||'';}catch(e){}
+(function(){const d=new Date(Date.now()+20*60000);$('fTime').value=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');})();
+
+/* ---------- phone numbers (private: only sender + courier) ---------- */
+const contacts={},loadingC={};
+function C(o){return contacts[o.id]||{};}
+async function loadContacts(){if(!api)return;
+  for(const o of orders){const mineO=o.by===me,job=o.courier===me;if(!mineO&&!job)continue;
+    const key=o.id+':'+(o.courier||'');if(loadingC[key])continue;loadingC[key]=1;
+    api.contact(o.id).then(c=>{contacts[o.id]=c;render();}).catch(()=>{});}}
+$('pushBtn').onclick=async()=>{if(!api)return;const b=$('pushBtn');b.disabled=true;
+  try{const r=await api.enablePush();const m={ok:'pushOk',denied:'pushDenied',unsupported:'pushNo',noKey:'pushKey'}[r]||'errSend';toast(T(m));if(r==='ok'){b.textContent=T('pushOk');try{localStorage.setItem('shlihli-push','1');}catch(_){}}else b.disabled=false;}
+  catch(err){console.error(err);toast(T('errSend'));b.disabled=false;}};
+try{if(localStorage.getItem('shlihli-push')==='1'){$('pushBtn').dataset.t='pushOk';}}catch(e){}
+
+/* ---------- profile (name + phone, saved on this phone) ---------- */
+let profile={name:'',phone:''};try{profile=JSON.parse(localStorage.getItem('shlihli-profile'))||profile;}catch(e){}
+function showMe(){$('meTxt').textContent=profile.name?T('hello')+' '+profile.name+' · '+profile.phone:'';$('editMe').classList.toggle('hide',!profile.name);}
+function askProfile(){$('pName').value=profile.name;$('pPhone').value=profile.phone;$('profile').classList.remove('hide');}
+$('editMe').onclick=askProfile;
+$('pform').addEventListener('submit',e=>{e.preventDefault();profile={name:$('pName').value.trim(),phone:$('pPhone').value.trim()};
+  try{localStorage.setItem('shlihli-profile',JSON.stringify(profile));}catch(_){}$('profile').classList.add('hide');showMe();});
+function nameOf(id){const o=orders.find(x=>x.courier===id&&x.courierName);return o?o.courierName:T('someone');}
+applyLang();applyRole();
+(async function init(){
+  showMe();if(!profile.name)askProfile();
+  try{api=window.__mockApi||await (await import('./db.js')).connect();}
+  catch(err){console.error(err);$('status').className='banner warn';$('status').textContent=String(err&&err.message||'').includes('CONFIG')?T('noConfig'):T('noDb');return;}
+  me=api.uid;$('status').classList.add('hide');
+  api.listen(list=>{
+    const prevIds=new Set(orders.map(o=>o.id));
+    orders=list;
+    if(!first)list.forEach(o=>{if(!prevIds.has(o.id)&&o.status==='open'&&o.by!==me&&ROLE==='drv'){ring();toast(T('newOne'));}});
+    render();first=false;loadContacts();
+  },err=>{console.error(err);$('status').className='banner warn';$('status').textContent=T('noDb');});
+})();
+})();
+</script>
+</body>
+</html>

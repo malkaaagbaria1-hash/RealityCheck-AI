@@ -1,0 +1,3 @@
+{ "name": "Rido", "short_name": "Rido", "start_url": "./", "display": "standalone",
+  "background_color": "#f7f5fd", "theme_color": "#4b2ee0", "dir": "rtl", "lang": "ar",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }] }
